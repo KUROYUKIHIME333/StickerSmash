@@ -2079,3 +2079,67 @@ We need to add a type definition after importing the ```domtoimage``` library si
 declare module 'dom-to-image';
 
 ```
+
+
+# Chap 9 . Configure status bar, splash screen and app icon
+
+## Configure the status bar
+
+```expo-status-bar``` library comes pre-installed in every project created using create-expo-app. This library provides a StatusBar component to configure the app's status bar style.
+
+Inside ```app/_layout.tsx```:
+
+- Import ```StatusBar``` from ```expo-status-bar```.
+- Group the ```StatusBar``` and existing ```Stack``` components with [React's Fragment component](https://react.dev/reference/react/Fragment).
+
+```tsx
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+
+export default function RootLayout() {
+  return (
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+      <StatusBar style="light" />
+    </>
+  );
+}
+```
+
+
+## App icon
+
+Inside the project, there's an icon.png file inside the ```assets/images``` directory. This is our app icon. 
+
+Like the splash screen image, the ```icon``` property in the ```app.json``` file configures the app icon's path. 
+By default, a new Expo project defines the correct path to ```./assets/images/icon.png```. 
+
+## Splash screen
+
+A splash screen is visible before the app's content is loaded. It uses a smaller image, such as an app's icon, which is centered. It hides once the app's content is ready to be displayed.
+
+The [```expo-splash-screen```](https://docs.expo.dev/versions/latest/sdk/splash-screen/) plugin already comes pre-installed in every project created using ```create-expo-app```. This library provides a config plugin to configure the splash screen.
+
+In app.json, the ```expo-splash-screen``` plugin is already configured to use the app's icon as the splash screen image (provided in the [downloadable assets](https://docs.expo.dev/tutorial/create-your-first-app/#download-assets)) with the following snippet so we don't have to change anything:
+
+```json
+{
+  "plugins": [
+    ... 
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/images/splash-icon.png"
+        ... 
+      }
+    ]
+  ]
+}
+```
+
+However, to test the splash screen, we cannot use Expo Go or a [development build](https://docs.expo.dev/develop/development-builds/introduction/). To test it, we need to create a preview or a production build of our app. We recommend going through the following resources to learn more about the splash screen configuration and how to test it:
+
+- [Create a splash screen icon](https://docs.expo.dev/develop/user-interface/splash-screen-and-app-icon/#splash-screen) guide to learn how splash screen icon is configured.
+- To learn how to create a preview build, see [Internal distribution](https://docs.expo.dev/tutorial/eas/internal-distribution-builds/) guide in EAS Tutorial, or to create production builds see guides for [Android](https://docs.expo.dev/tutorial/eas/android-production-build/) and [iOS](https://docs.expo.dev/tutorial/eas/ios-production-build/).
