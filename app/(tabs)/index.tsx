@@ -5,6 +5,7 @@ import * as MediaLibrary from "expo-media-library";
 
 import { ImageSourcePropType, StyleSheet, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { captureRef } from "react-native-view-shot";
 import Button from "../components/Button";
 import CircleButton from "../components/CircleButton";
 import EmojiList from "../components/EmojiList";
@@ -56,7 +57,19 @@ export default function Index() {
   }
 
   const onSaveImageAsync = async () => {
-    //Plus tard
+    try {
+      const localUri = await captureRef(imageRef, {
+        height: 440,
+        quality: 1,
+      });
+      await MediaLibrary.saveToLibraryAsync(localUri);
+
+      if (localUri) {
+        alert("Enregistré");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
 
