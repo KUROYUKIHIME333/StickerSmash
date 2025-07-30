@@ -1899,4 +1899,25 @@ const styles = StyleSheet.create({
 
 ```
 
+# Chap 8 . Handle platform differences
+
+```Android```, ```iOS```, and the ```web``` have different capabilities. In our case, both ```Android``` and ```iOS``` can capture a screenshot with the ```react-native-view-shot``` library. 
+However, web browsers cannot.
+
+So, we need to handle capturing screenshots for web browsers so apps has the same functionality on all platforms.
+
+## Install and import dom-to-image
+
+To capture a screenshot on the web and save it as an image, we can use a third-party library called ```dom-to-image```. 
+It takes a screenshot of any DOM node and turns it into a vector (SVG) or raster (PNG or JPEG) image.
+Interesting, no ?
+
+```bash
+npm install dom-to-image
+```
+
+### Tips :
+After installing and restarting the dev server, press ````w``` to open web
+
+
 ##
