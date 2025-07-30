@@ -2079,3 +2079,38 @@ We need to add a type definition after importing the ```domtoimage``` library si
 declare module 'dom-to-image';
 
 ```
+
+
+# Chap 9 . Configure status bar, splash screen and app icon
+
+## Configure the status bar
+
+```expo-status-bar``` library comes pre-installed in every project created using create-expo-app. This library provides a StatusBar component to configure the app's status bar style.
+
+Inside ```app/_layout.tsx```:
+
+- Import ```StatusBar``` from ```expo-status-bar```.
+- Group the ```StatusBar``` and existing ```Stack``` components with [React's Fragment component](https://react.dev/reference/react/Fragment).
+
+```tsx
+import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+
+export default function RootLayout() {
+  return (
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+      <StatusBar style="light" />
+    </>
+  );
+}
+```
+
+
+##
+
+##
+
+##
