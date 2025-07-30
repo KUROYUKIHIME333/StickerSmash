@@ -2109,7 +2109,12 @@ export default function RootLayout() {
 ```
 
 
-##
+## App icon
+
+Inside the project, there's an icon.png file inside the ```assets/images``` directory. This is our app icon. 
+
+Like the splash screen image, the ```icon``` property in the ```app.json``` file configures the app icon's path. 
+By default, a new Expo project defines the correct path to ```./assets/images/icon.png```. 
 
 ##
 
