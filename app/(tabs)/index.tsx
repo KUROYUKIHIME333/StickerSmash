@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import * as ImagePicker from "expo-image-picker";
 import * as MediaLibrary from "expo-media-library";
@@ -21,6 +21,8 @@ export default function Index() {
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [selectedEmoji, setSelectedEmoji] = useState<ImageSourcePropType | undefined>(undefined);
+
+  const imageRef = useRef<View>(null);
 
   if(!status){
     requestPermission();
@@ -61,8 +63,10 @@ export default function Index() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <View style={styles.imageContainer}>
-        <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedPicture} />
-        {selectedEmoji && <EmojiSticker imageSize={50} stickerSource={selectedEmoji}/>}
+        <View ref={imageRef} collapsable={false}>
+          <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedPicture} />
+          {selectedEmoji && <EmojiSticker imageSize={50} stickerSource={selectedEmoji}/>}
+        </View>
       </View>
       {
         showAppOptions? (<View style={styles.optionsContainer}>

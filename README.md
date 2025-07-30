@@ -1728,3 +1728,36 @@ export default function Index() {
 }
 
 ```
+
+## Create a ref to save the current view
+
+We'll use ```react-native-view-shot``` to allow the user to take a screenshot within the app. This library captures the screenshot of a ```View``` as an image using the ```captureRef()``` method. 
+It returns the URI of the captured screenshot image file.
+
+- Import ```captureRef``` from ```react-native-view-shot``` and ```useRef``` from React.
+- Create an ```imageRef``` reference variable to store the reference of the screenshot image captured.
+- Wrap the ```ImageViewer``` and ```EmojiSticker``` components inside a ```View``` and then pass the reference variable to it.
+
+```tsx
+import { useState, useRef } from 'react';
+import { captureRef } from 'react-native-view-shot';
+
+export default function Index() {
+   const imageRef = useRef<View>(null);
+
+  // ...rest of the code remains same
+
+  return (
+    <GestureHandlerRootView style={styles.container}>
+      <View style={styles.imageContainer}>
+        <View ref={imageRef} collapsable={false}>
+          <ImageViewer imgSource={PlaceholderImage} selectedImage={selectedImage} />
+          {pickedEmoji && <EmojiSticker imageSize={40} stickerSource={pickedEmoji} />}
+        </View>
+      </View>
+      {/* ...rest of the code remains same */}
+    </GestureHandlerRootView>
+  );
+}
+
+```
