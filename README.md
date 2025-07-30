@@ -1689,3 +1689,42 @@ export default function EmojiSticker({ imageSize, stickerSource }: Props) {
 }
 
 ```
+
+# Chap 7 . Take a screenshot
+
+We'll take a screenshot using a third-party library and save it on the device's media library. 
+We'll use ```react-native-view-shot``` to take a screenshot and ```expo-media-library``` to save an image on device's media library.
+
+Just to be clear, so far, we have used third-party libraries, such as ```react-native-gesture-handler```, ```react-native-reanimated```. 
+We can find hundreds of other third-party libraries on [React Native Directory](https://reactnative.directory/) depending on a use case.
+
+## Install libraries
+
+```bash
+npx expo install react-native-view-shot expo-media-library
+```
+
+## Prompt for permissions
+
+An app that requires sensitive information, such as accessing a device's media library, has to prompt permission to allow or deny access. Using ```usePermissions()``` hook from ```expo-media-library```, we can use the permission ```status``` and ```requestPermission()``` method to ask for access.
+
+When the app loads for the first time and the permission status is neither granted nor denied, the value of the ```status``` is ```null```. When asked for permission, a user can either grant the permission or deny it. We can add a condition to check if it is ```null```, and if it is, trigger the ```requestPermission()``` method. After getting the access, the value of the ```status``` changes to ```granted```.
+
+The ```app/(tabs)/index.tsx```:
+```tsx
+import * as MediaLibrary from 'expo-media-library';
+
+// ...rest of the code remains same
+
+export default function Index() {
+  const [status, requestPermission] = MediaLibrary.usePermissions();
+  // ...rest of the code remains same
+
+  if (status === null) {
+    requestPermission();
+  }
+
+  // ...rest of the code remains same
+}
+
+```
